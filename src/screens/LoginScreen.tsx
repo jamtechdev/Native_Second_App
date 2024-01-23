@@ -1,14 +1,27 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity, StyleSheet, Alert, Pressable } from 'react-native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
-const LoginScreen = ({ navigation }) => {
+type StackParamList = {
+  Login: undefined; 
+  DrawerStack: undefined; 
+};
+
+type LoginScreenNavigationProp = StackNavigationProp<StackParamList, 'Login'>;
+
+type Props = {
+  navigation: LoginScreenNavigationProp;
+};
+
+// const LoginScreen = ({ navigation }) => {
+  const LoginScreen: React.FC<Props> = ({ navigation }) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    if (email === 'a@gmail.com' && password === '1') {
-      navigation.push('TabNavigator');
+    if (email === 'a' && password === 'a') {
+      navigation.push('DrawerStack');
     } else {
       Alert.alert('Invalid Credentials', 'Please check your email and password.');
     }
@@ -61,15 +74,18 @@ const LoginScreen = ({ navigation }) => {
           <Text style={styles.textFacebook}>Login with Facebook</Text>
         </Pressable>
       </View>
-      <View>
+      {/* <View>
         <Image
           source={require('../assests/icons/googleicon.png')} // replace with the actual path to your logo image
           style={{ width: 30, height: 30 }} // adjust the width and height according to your needs
         />
+      </View> */}
+      <View>
+        <Text>OR</Text>
       </View>
       <View style={styles.buttonApple}>
         <Pressable onPress={handleSignInWithApple}>
-          <Text style={styles.textApple}>Sign in with Apple</Text>
+          <Text style={styles.textApple}>Sign in with Google</Text>
         </Pressable>
       </View>
     </View>
